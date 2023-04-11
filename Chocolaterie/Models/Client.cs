@@ -5,6 +5,13 @@ namespace Chocolaterie.Models
 {
     public class Client : BaseEntity
     {
+        public Client() { }
+
+        public Client(string name)
+        {
+            Name = name;
+        }
+
         [Required]
         public string Name { get; set; }
 
@@ -12,12 +19,7 @@ namespace Chocolaterie.Models
 
         public string Address { get; set; }
 
-        public int OrderId { get; set; }
-        public Order Order { get; set; }
+        public ICollection<Order> Orders { get; } = new List<Order>();
 
-        public Client(string name)
-        {
-            Name = name;
-        }
     }
 }

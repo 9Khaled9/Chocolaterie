@@ -6,13 +6,17 @@ namespace Chocolaterie.Models
 {
     public class Factory : BaseEntity
     {
-        [Required]
-        public string Name { get; set; }
-        public ICollection<ChocolateBar> ChocolateBars { get; } = new List<ChocolateBar>();
+        public Factory() { }
 
         public Factory(string name)
         {
             Name = name;
         }
+
+        [Required]
+        public string Name { get; set; }
+
+        public ICollection<ChocolateBar> ChocolateBars { get; } = new List<ChocolateBar>();
+
     }
 }

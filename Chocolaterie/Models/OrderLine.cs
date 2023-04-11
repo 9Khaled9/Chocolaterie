@@ -5,6 +5,15 @@ namespace Chocolaterie.Models
 {
     public class OrderLine : BaseEntity
     {
+        public OrderLine()
+        {
+        }
+
+        public OrderLine(int quantity)
+        {
+            Quantity = quantity;
+        }
+
         [Required]
         public int Quantity { get; set; }
 
@@ -14,9 +23,5 @@ namespace Chocolaterie.Models
         public int OrderId { get; set; }
         public Order Order { get; set; }
 
-        public OrderLine(int quantity)
-        {
-            Quantity = quantity;
-        }
     }
 }

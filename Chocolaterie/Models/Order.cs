@@ -5,6 +5,14 @@ namespace Chocolaterie.Models
 {
     public class Order : BaseEntity
     {
+        public Order()
+        {
+        }
+
+        public Order(OrderType orderType)
+        {
+            OrderType = orderType;
+        }
 
         [Required]
         public OrderType OrderType { get; set; }
@@ -27,11 +35,6 @@ namespace Chocolaterie.Models
         public Discount? Discount { get; set; }
 
         public ICollection<OrderLine> OrderLines { get; } = new List<OrderLine>();
-
-        public Order(OrderType orderType)
-        {
-            OrderType = orderType;
-        }
 
         public void AddLine (OrderLine line)
         {

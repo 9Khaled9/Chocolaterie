@@ -5,6 +5,15 @@ namespace Chocolaterie.Models
 {
     public class WholeSaler : BaseEntity
     {
+        public WholeSaler()
+        {
+        }
+
+        public WholeSaler(string name)
+        {
+            Name = name;
+        }
+
         [Required]
         public string Name { get; set; }
 
@@ -15,10 +24,5 @@ namespace Chocolaterie.Models
         public ICollection<Stock> Stocks { get; } = new List<Stock>();
 
         public ICollection<Order> Orders { get; } = new List<Order>();
-
-        public WholeSaler(string name)
-        {
-            Name = name;
-        }
     }
 }

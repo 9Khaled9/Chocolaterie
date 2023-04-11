@@ -5,6 +5,15 @@ namespace Chocolaterie.Models
 {
     public class Stock : BaseEntity
     {
+        public Stock()
+        {
+        }
+
+        public Stock(int quantity)
+        {
+            Quatity = quantity;
+        }
+
         [Required]
         public int Quatity { get; set; }
 
@@ -18,9 +27,5 @@ namespace Chocolaterie.Models
 
         public ICollection<OrderLine> OrderLines { get; } = new List<OrderLine>();
 
-        public Stock (int quantity)
-        {
-            Quatity = quantity;
-        }
     }
 }

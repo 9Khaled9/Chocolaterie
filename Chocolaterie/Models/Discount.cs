@@ -5,6 +5,16 @@ namespace Chocolaterie.Models
 {
     public class Discount : BaseEntity
     {
+        public Discount()
+        {
+        }
+
+        public Discount(string title, double percentage)
+        {
+            Title = title;
+            Percentage = percentage;
+        }
+
         [Required]
         public string Title { get; set; }
 
@@ -13,13 +23,7 @@ namespace Chocolaterie.Models
         [Required]
         public double Percentage { get; set; }
 
-        public int OrderId { get; set; }
-        public Order Order { get; set; }
+        public ICollection<Order> Orders { get; } = new List<Order>();
 
-        public Discount(string title, double percentage)
-        {
-            Title = title;
-            Percentage = percentage;
-        }
     }
 }
