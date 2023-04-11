@@ -11,7 +11,7 @@ namespace Chocolaterie.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Factory",
+                name: "Factories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -24,7 +24,7 @@ namespace Chocolaterie.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ChocolateBar",
+                name: "ChocolateBars",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -40,14 +40,14 @@ namespace Chocolaterie.Migrations
                     table.ForeignKey(
                         name: "FK_ChocolateBar_Factory_FactoryId",
                         column: x => x.FactoryId,
-                        principalTable: "Factory",
+                        principalTable: "Factories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChocolateBar_FactoryId",
-                table: "ChocolateBar",
+                table: "ChocolateBars",
                 column: "FactoryId");
         }
 
@@ -55,10 +55,10 @@ namespace Chocolaterie.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ChocolateBar");
+                name: "ChocolateBars");
 
             migrationBuilder.DropTable(
-                name: "Factory");
+                name: "Factories");
         }
     }
 }

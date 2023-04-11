@@ -11,7 +11,7 @@ namespace Chocolaterie.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Client",
+                name: "Clients",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -26,7 +26,7 @@ namespace Chocolaterie.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Discount",
+                name: "Discounts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -41,7 +41,7 @@ namespace Chocolaterie.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WholeSaler",
+                name: "WholeSalers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -56,7 +56,7 @@ namespace Chocolaterie.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Orders",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -76,25 +76,25 @@ namespace Chocolaterie.Migrations
                     table.ForeignKey(
                         name: "FK_Order_Client_ClientId",
                         column: x => x.ClientId,
-                        principalTable: "Client",
+                        principalTable: "Clients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Order_Discount_DiscountId",
                         column: x => x.DiscountId,
-                        principalTable: "Discount",
+                        principalTable: "Discounts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Order_WholeSaler_WholeSalerId",
                         column: x => x.WholeSalerId,
-                        principalTable: "WholeSaler",
+                        principalTable: "WholeSalers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Stock",
+                name: "Stocks",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -110,19 +110,19 @@ namespace Chocolaterie.Migrations
                     table.ForeignKey(
                         name: "FK_Stock_ChocolateBar_ChocolateBarId",
                         column: x => x.ChocolateBarId,
-                        principalTable: "ChocolateBar",
+                        principalTable: "ChocolateBars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Stock_WholeSaler_WholeSalerId",
                         column: x => x.WholeSalerId,
-                        principalTable: "WholeSaler",
+                        principalTable: "WholeSalers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderLine",
+                name: "OrderLines",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -137,49 +137,49 @@ namespace Chocolaterie.Migrations
                     table.ForeignKey(
                         name: "FK_OrderLine_Order_OrderId",
                         column: x => x.OrderId,
-                        principalTable: "Order",
+                        principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderLine_Stock_StockId",
                         column: x => x.StockId,
-                        principalTable: "Stock",
+                        principalTable: "Stocks",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_ClientId",
-                table: "Order",
+                table: "Orders",
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_DiscountId",
-                table: "Order",
+                table: "Orders",
                 column: "DiscountId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_WholeSalerId",
-                table: "Order",
+                table: "Orders",
                 column: "WholeSalerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderLine_OrderId",
-                table: "OrderLine",
+                table: "OrderLines",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderLine_StockId",
-                table: "OrderLine",
+                table: "OrderLines",
                 column: "StockId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stock_ChocolateBarId",
-                table: "Stock",
+                table: "Stocks",
                 column: "ChocolateBarId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stock_WholeSalerId",
-                table: "Stock",
+                table: "Stocks",
                 column: "WholeSalerId");
         }
 
@@ -187,22 +187,22 @@ namespace Chocolaterie.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "OrderLine");
+                name: "OrderLines");
 
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Stock");
+                name: "Stocks");
 
             migrationBuilder.DropTable(
-                name: "Client");
+                name: "Clients");
 
             migrationBuilder.DropTable(
-                name: "Discount");
+                name: "Discounts");
 
             migrationBuilder.DropTable(
-                name: "WholeSaler");
+                name: "WholeSalers");
         }
     }
 }

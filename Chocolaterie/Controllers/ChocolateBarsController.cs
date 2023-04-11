@@ -25,22 +25,22 @@ namespace Chocolaterie.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ChocolateBar>>> GetChocolateBar()
         {
-          if (_context.ChocolateBar == null)
+          if (_context.ChocolateBars == null)
           {
               return NotFound();
           }
-            return await _context.ChocolateBar.ToListAsync();
+            return await _context.ChocolateBars.ToListAsync();
         }
 
         // GET: api/ChocolateBars/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ChocolateBar>> GetChocolateBar(int id)
         {
-          if (_context.ChocolateBar == null)
+          if (_context.ChocolateBars == null)
           {
               return NotFound();
           }
-            var chocolateBar = await _context.ChocolateBar.FindAsync(id);
+            var chocolateBar = await _context.ChocolateBars.FindAsync(id);
 
             if (chocolateBar == null)
             {
@@ -86,11 +86,11 @@ namespace Chocolaterie.Controllers
         [HttpPost]
         public async Task<ActionResult<ChocolateBar>> PostChocolateBar(ChocolateBar chocolateBar)
         {
-          if (_context.ChocolateBar == null)
+          if (_context.ChocolateBars == null)
           {
-              return Problem("Entity set 'ChocolaterieContext.ChocolateBar'  is null.");
+              return Problem("Entity set 'ChocolaterieContext.ChocolateBars'  is null.");
           }
-            _context.ChocolateBar.Add(chocolateBar);
+            _context.ChocolateBars.Add(chocolateBar);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetChocolateBar", new { id = chocolateBar.Id }, chocolateBar);
@@ -100,17 +100,17 @@ namespace Chocolaterie.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteChocolateBar(int id)
         {
-            if (_context.ChocolateBar == null)
+            if (_context.ChocolateBars == null)
             {
                 return NotFound();
             }
-            var chocolateBar = await _context.ChocolateBar.FindAsync(id);
+            var chocolateBar = await _context.ChocolateBars.FindAsync(id);
             if (chocolateBar == null)
             {
                 return NotFound();
             }
 
-            _context.ChocolateBar.Remove(chocolateBar);
+            _context.ChocolateBars.Remove(chocolateBar);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -118,7 +118,7 @@ namespace Chocolaterie.Controllers
 
         private bool ChocolateBarExists(int id)
         {
-            return (_context.ChocolateBar?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.ChocolateBars?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

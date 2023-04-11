@@ -16,15 +16,15 @@ namespace Chocolaterie.Data
         {
         }
 
-        public DbSet<Factory> Factory { get; set; } = default!;
+        public DbSet<Factory> Factories { get; set; } = default!;
 
-        public DbSet<ChocolateBar>? ChocolateBar { get; set; }
-        public DbSet<ChocolateBar>? Stock { get; set; }
-        public DbSet<ChocolateBar>? WholeSaler { get; set; }
-        public DbSet<ChocolateBar>? OrderLine { get; set; }
-        public DbSet<ChocolateBar>? Order { get; set; }
-        public DbSet<ChocolateBar>? Client { get; set; }
-        public DbSet<ChocolateBar>? Discount { get; set; }
+        public DbSet<ChocolateBar>? ChocolateBars { get; set; }
+        public DbSet<ChocolateBar>? Stocks { get; set; }
+        public DbSet<ChocolateBar>? WholeSalers { get; set; }
+        public DbSet<ChocolateBar>? OrderLines { get; set; }
+        public DbSet<ChocolateBar>? Orders { get; set; }
+        public DbSet<ChocolateBar>? Clients { get; set; }
+        public DbSet<ChocolateBar>? Discounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

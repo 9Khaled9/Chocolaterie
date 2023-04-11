@@ -10,9 +10,10 @@ namespace Chocolaterie.Models
         {
         }
 
-        public ChocolateBar(string name)
+        public ChocolateBar(string name, double price)
         {
             Name = name;
+            Price = price;
         }
 
         [Required]

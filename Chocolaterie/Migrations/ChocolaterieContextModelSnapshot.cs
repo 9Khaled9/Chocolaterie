@@ -21,7 +21,7 @@ namespace Chocolaterie.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Chocolaterie.Models.ChocolateBar", b =>
+            modelBuilder.Entity("Chocolaterie.Models.ChocolateBars", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,10 +46,10 @@ namespace Chocolaterie.Migrations
 
                     b.HasIndex("FactoryId");
 
-                    b.ToTable("ChocolateBar");
+                    b.ToTable("ChocolateBars");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Client", b =>
+            modelBuilder.Entity("Chocolaterie.Models.Clients", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,10 +71,10 @@ namespace Chocolaterie.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Client");
+                    b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Discount", b =>
+            modelBuilder.Entity("Chocolaterie.Models.Discounts", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -95,10 +95,10 @@ namespace Chocolaterie.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Discount");
+                    b.ToTable("Discounts");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Factory", b =>
+            modelBuilder.Entity("Chocolaterie.Models.Factories", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -112,10 +112,10 @@ namespace Chocolaterie.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Factory");
+                    b.ToTable("Factories");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Order", b =>
+            modelBuilder.Entity("Chocolaterie.Models.Orders", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -156,10 +156,10 @@ namespace Chocolaterie.Migrations
 
                     b.HasIndex("WholeSalerId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.OrderLine", b =>
+            modelBuilder.Entity("Chocolaterie.Models.OrderLines", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -182,10 +182,10 @@ namespace Chocolaterie.Migrations
 
                     b.HasIndex("StockId");
 
-                    b.ToTable("OrderLine");
+                    b.ToTable("OrderLines");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Stock", b =>
+            modelBuilder.Entity("Chocolaterie.Models.Stocks", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -212,10 +212,10 @@ namespace Chocolaterie.Migrations
 
                     b.HasIndex("WholeSalerId");
 
-                    b.ToTable("Stock");
+                    b.ToTable("Stocks");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.WholeSaler", b =>
+            modelBuilder.Entity("Chocolaterie.Models.WholeSalers", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -237,116 +237,116 @@ namespace Chocolaterie.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WholeSaler");
+                    b.ToTable("WholeSalers");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.ChocolateBar", b =>
+            modelBuilder.Entity("Chocolaterie.Models.ChocolateBars", b =>
                 {
-                    b.HasOne("Chocolaterie.Models.Factory", "Factory")
+                    b.HasOne("Chocolaterie.Models.Factories", "Factories")
                         .WithMany("ChocolateBars")
                         .HasForeignKey("FactoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Factory");
+                    b.Navigation("Factories");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Order", b =>
+            modelBuilder.Entity("Chocolaterie.Models.Orders", b =>
                 {
-                    b.HasOne("Chocolaterie.Models.Client", "Client")
+                    b.HasOne("Chocolaterie.Models.Clients", "Clients")
                         .WithMany("Orders")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Chocolaterie.Models.Discount", "Discount")
+                    b.HasOne("Chocolaterie.Models.Discounts", "Discounts")
                         .WithMany("Orders")
                         .HasForeignKey("DiscountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Chocolaterie.Models.WholeSaler", "WholeSaler")
+                    b.HasOne("Chocolaterie.Models.WholeSalers", "WholeSalers")
                         .WithMany("Orders")
                         .HasForeignKey("WholeSalerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Client");
+                    b.Navigation("Clients");
 
-                    b.Navigation("Discount");
+                    b.Navigation("Discounts");
 
-                    b.Navigation("WholeSaler");
+                    b.Navigation("WholeSalers");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.OrderLine", b =>
+            modelBuilder.Entity("Chocolaterie.Models.OrderLines", b =>
                 {
-                    b.HasOne("Chocolaterie.Models.Order", "Order")
+                    b.HasOne("Chocolaterie.Models.Orders", "Orders")
                         .WithMany("OrderLines")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Chocolaterie.Models.Stock", "Stock")
+                    b.HasOne("Chocolaterie.Models.Stocks", "Stocks")
                         .WithMany("OrderLines")
                         .HasForeignKey("StockId")
                         .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired();
 
-                    b.Navigation("Order");
+                    b.Navigation("Orders");
 
-                    b.Navigation("Stock");
+                    b.Navigation("Stocks");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Stock", b =>
+            modelBuilder.Entity("Chocolaterie.Models.Stocks", b =>
                 {
-                    b.HasOne("Chocolaterie.Models.ChocolateBar", "ChocolateBar")
+                    b.HasOne("Chocolaterie.Models.ChocolateBars", "ChocolateBars")
                         .WithMany("Stocks")
                         .HasForeignKey("ChocolateBarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Chocolaterie.Models.WholeSaler", "WholeSaler")
+                    b.HasOne("Chocolaterie.Models.WholeSalers", "WholeSalers")
                         .WithMany("Stocks")
                         .HasForeignKey("WholeSalerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ChocolateBar");
+                    b.Navigation("ChocolateBars");
 
-                    b.Navigation("WholeSaler");
+                    b.Navigation("WholeSalers");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.ChocolateBar", b =>
+            modelBuilder.Entity("Chocolaterie.Models.ChocolateBars", b =>
                 {
                     b.Navigation("Stocks");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Client", b =>
+            modelBuilder.Entity("Chocolaterie.Models.Clients", b =>
                 {
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Discount", b =>
+            modelBuilder.Entity("Chocolaterie.Models.Discounts", b =>
                 {
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Factory", b =>
+            modelBuilder.Entity("Chocolaterie.Models.Factories", b =>
                 {
                     b.Navigation("ChocolateBars");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Order", b =>
+            modelBuilder.Entity("Chocolaterie.Models.Orders", b =>
                 {
                     b.Navigation("OrderLines");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Stock", b =>
+            modelBuilder.Entity("Chocolaterie.Models.Stocks", b =>
                 {
                     b.Navigation("OrderLines");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.WholeSaler", b =>
+            modelBuilder.Entity("Chocolaterie.Models.WholeSalers", b =>
                 {
                     b.Navigation("Orders");
 
