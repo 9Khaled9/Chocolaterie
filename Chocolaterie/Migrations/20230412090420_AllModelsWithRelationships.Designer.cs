@@ -196,7 +196,7 @@ namespace Chocolaterie.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ChocolateBarId")
+                    b.Property<int>("StockId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -211,7 +211,7 @@ namespace Chocolaterie.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChocolateBarId");
+                    b.HasIndex("StockId");
 
                     b.HasIndex("WholeSalerId");
 
@@ -304,7 +304,7 @@ namespace Chocolaterie.Migrations
                 {
                     b.HasOne("Chocolaterie.Entities.ChocolateBar", "ChocolateBar")
                         .WithMany("Stocks")
-                        .HasForeignKey("ChocolateBarId")
+                        .HasForeignKey("StockId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -223,7 +223,7 @@ namespace Chocolaterie.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Stocks_ChocolateBars_ChocolateBarId",
                 table: "Stocks",
-                column: "ChocolateBarId",
+                column: "StockId",
                 principalTable: "ChocolateBars",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -453,7 +453,7 @@ namespace Chocolaterie.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Stock_ChocolateBar_ChocolateBarId",
                 table: "Stock",
-                column: "ChocolateBarId",
+                column: "StockId",
                 principalTable: "ChocolateBar",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);

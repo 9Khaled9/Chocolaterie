@@ -205,7 +205,7 @@ namespace Chocolaterie.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Stock_ChocolateBarId",
                 table: "Stock",
-                column: "ChocolateBarId");
+                column: "StockId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stock_WholeSalerId",

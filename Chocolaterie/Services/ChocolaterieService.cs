@@ -87,13 +87,60 @@ namespace Chocolaterie.Services
 
             if(chocolateBar.FactoryId != info.FactoryId)
             {
-                throw new ArgumentException(Error.FactoryHasNoRightDeleteOthersChocolateBar);
+                throw new ArgumentException(Error.FactoryHasNoRightAccessNotOwnedChocolateBar);
             }
 
             _context.ChocolateBars.Remove(chocolateBar);
             var rowCount = await _context.SaveChangesAsync();
 
             return rowCount > 0;
+        }
+
+        public async Task<StockDto> UpdateStockQuantityAsync(UpdateStockQuantityInfo info)
+        {
+            if (info is null)
+            {
+                throw new ArgumentNullException(nameof(info));
+            }
+
+            var wholeSaler = await _context.WholeSalers.FindAsync(info.WholeSalerId);
+            if (wholeSaler == null)
+            {
+                throw new ArgumentNullException(Error.WholeSalerNotFount);
+            }
+
+            var stock = await _context.Stocks.FindAsync(info.StockId);
+            if (stock == null)
+            {
+                throw new ArgumentNullException(Error.StockNotFount);
+            }
+
+            if (info.WholeSalerId != stock.WholeSaler.Id)
+            {
+                throw new ArgumentNullException(Error.WholeSalerHasNoRightAccessNotOwnedChocolateBar);
+            }
+
+            _context.Entry(stock).State = EntityState.Modified;
+
+            try
+            {
+                stock.Quatity = info.Quantity;
+                await _context.SaveChangesAsync();
+
+                var stockDto = _mapper.Map<StockDto>(stock);
+                return stockDto;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!StockExists(info.StockId))
+                {
+                    throw new ArgumentNullException(Error.StockNotFount);
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
         #endregion
@@ -115,6 +162,15 @@ namespace Chocolaterie.Services
             }
         }
 
+        private bool ChocolateBarExists(int id)
+        {
+            return (_context.ChocolateBars?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        private bool StockExists(int id)
+        {
+            return (_context.Stocks?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
         #endregion
     }
 }

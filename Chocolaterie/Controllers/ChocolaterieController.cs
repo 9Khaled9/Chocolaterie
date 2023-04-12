@@ -19,7 +19,7 @@ namespace Chocolaterie.Controllers
             _chocolaterieService = chocolaterieService;
         }
 
-        [HttpPost("AddFactoryAsync")]
+        [HttpPost("AddFactory")]
         public async Task<IActionResult> AddFactoryAsync(FactoryDto dto)
         {
             var result = await _chocolaterieService.AddFactoryAsync(dto);
@@ -31,7 +31,7 @@ namespace Chocolaterie.Controllers
             return Ok();
         }
 
-        [HttpGet("ListChocolateBarsByFactoryAsync/{id}")]
+        [HttpGet("ListChocolateBarsByFactory/{id}")]
         public async Task<IList<ChocolateBarDto>> ListChocolateBarsByFactoryAsync(int id)
         {
             if (id < 1)
@@ -43,7 +43,7 @@ namespace Chocolaterie.Controllers
             return list;
         }
 
-        [HttpPost("AddChocolateBarByFactoryAsync")]
+        [HttpPost("AddChocolateBarByFactory")]
         public async Task<IActionResult> AddChocolateBarByFactoryAsync(AddChocolateBarByFactoryInfo info)
         {
             var result = await _chocolaterieService.AddChocolateBarByFactoryAsync(info);
@@ -55,7 +55,7 @@ namespace Chocolaterie.Controllers
             return Ok();
         }
 
-        [HttpDelete("DeleteChocolateBarByFactoryAsync")]
+        [HttpDelete("DeleteChocolateBarByFactory")]
         public async Task<IActionResult> DeleteChocolateBarByFactoryAsync(DeleteChocolateBarByFactoryInfo info)
         {
             var result = await _chocolaterieService.DeleteChocolateBarByFactoryAsync(info);
@@ -65,6 +65,16 @@ namespace Chocolaterie.Controllers
                 return BadRequest();
             }
             return Ok();
+        }
+
+        [HttpPut("UpdateStockQuantity")]
+        public async Task<ActionResult<StockDto>> UpdateStockQuantityAsync(UpdateStockQuantityInfo info)
+        {
+            var result = await _chocolaterieService.UpdateStockQuantityAsync(info);
+
+            return Ok(result);
+
+            
         }
     }
 }
