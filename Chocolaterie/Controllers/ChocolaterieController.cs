@@ -1,6 +1,6 @@
 ﻿using Chocolaterie.Data;
 using Chocolaterie.DTOs;
-using Chocolaterie.Models;
+using Chocolaterie.Entities;
 using Chocolaterie.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,20 +19,8 @@ namespace Chocolaterie.Controllers
             _chocolaterieService = chocolaterieService;
         }
 
-        [HttpGet("GetChocolateBarsListByFactoryAsync/{id}")]
-        public async Task<IList<ChocolateBarDto>> GetChocolateBarsListByFactoryAsync(int id)
-        {
-            if (id < 1)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            var list = await _chocolaterieService.GetChocolateBarsListByFactoryAsync(id);
-
-            return list;
-        }
-
         [HttpPost("AddFactoryAsync")]
-        public async Task<ActionResult> AddFactoryAsync(FactoryDto dto)
+        public async Task<IActionResult> AddFactoryAsync(FactoryDto dto)
         {
             var result = await _chocolaterieService.AddFactoryAsync(dto);
 
@@ -40,19 +28,43 @@ namespace Chocolaterie.Controllers
             {
                 return BadRequest();
             }
-            return Ok(result);
+            return Ok();
         }
 
-        [HttpPost("AddFactoryAsync")]
-        public async Task<ActionResult> AddChocolateBarByFactoryAsync(AddChocolateBarByFactoryInfo dto)
+        [HttpGet("ListChocolateBarsByFactoryAsync/{id}")]
+        public async Task<IList<ChocolateBarDto>> ListChocolateBarsByFactoryAsync(int id)
         {
-            var result = await _chocolaterieService.AddChocolateBarByFactoryAsync(dto);
+            if (id < 1)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            var list = await _chocolaterieService.ListChocolateBarsByFactoryAsync(id);
+
+            return list;
+        }
+
+        [HttpPost("AddChocolateBarByFactoryAsync")]
+        public async Task<IActionResult> AddChocolateBarByFactoryAsync(AddChocolateBarByFactoryInfo info)
+        {
+            var result = await _chocolaterieService.AddChocolateBarByFactoryAsync(info);
 
             if (!result)
             {
                 return BadRequest();
             }
-            return Ok(result);
+            return Ok();
+        }
+
+        [HttpDelete("DeleteChocolateBarByFactoryAsync")]
+        public async Task<IActionResult> DeleteChocolateBarByFactoryAsync(DeleteChocolateBarByFactoryInfo info)
+        {
+            var result = await _chocolaterieService.DeleteChocolateBarByFactoryAsync(info);
+
+            if (!result)
+            {
+                return BadRequest();
+            }
+            return Ok();
         }
     }
 }

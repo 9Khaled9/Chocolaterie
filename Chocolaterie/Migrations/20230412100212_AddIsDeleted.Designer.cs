@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Chocolaterie.Migrations
 {
     [DbContext(typeof(ChocolaterieContext))]
-    [Migration("20230411081836_AllModelsRelationships")]
-    partial class AllModelsRelationships
+    [Migration("20230412100212_AddIsDeleted")]
+    partial class AddIsDeleted
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace Chocolaterie.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Chocolaterie.Models.ChocolateBars", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.ChocolateBar", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,6 +38,9 @@ namespace Chocolaterie.Migrations
                     b.Property<int>("FactoryId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -49,10 +52,10 @@ namespace Chocolaterie.Migrations
 
                     b.HasIndex("FactoryId");
 
-                    b.ToTable("ChocolateBars");
+                    b.ToTable("ChocolateBar");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Clients", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.Client", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,16 +71,19 @@ namespace Chocolaterie.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clients");
+                    b.ToTable("Client");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Discounts", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.Discount", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -89,6 +95,9 @@ namespace Chocolaterie.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<double>("Percentage")
                         .HasColumnType("float");
 
@@ -98,16 +107,19 @@ namespace Chocolaterie.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Discounts");
+                    b.ToTable("Discount");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Factories", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.Factory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -118,7 +130,7 @@ namespace Chocolaterie.Migrations
                     b.ToTable("Factories");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Orders", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -138,6 +150,9 @@ namespace Chocolaterie.Migrations
 
                     b.Property<int>("DiscountId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("OrderType")
                         .HasColumnType("int");
@@ -159,16 +174,19 @@ namespace Chocolaterie.Migrations
 
                     b.HasIndex("WholeSalerId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.OrderLines", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.OrderLine", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
@@ -185,10 +203,10 @@ namespace Chocolaterie.Migrations
 
                     b.HasIndex("StockId");
 
-                    b.ToTable("OrderLines");
+                    b.ToTable("OrderLine");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Stocks", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.Stock", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -203,6 +221,9 @@ namespace Chocolaterie.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Quatity")
                         .HasColumnType("int");
 
@@ -215,10 +236,10 @@ namespace Chocolaterie.Migrations
 
                     b.HasIndex("WholeSalerId");
 
-                    b.ToTable("Stocks");
+                    b.ToTable("Stock");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.WholeSalers", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.WholeSaler", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -234,122 +255,125 @@ namespace Chocolaterie.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("WholeSalers");
+                    b.ToTable("WholeSaler");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.ChocolateBars", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.ChocolateBar", b =>
                 {
-                    b.HasOne("Chocolaterie.Models.Factories", "Factories")
+                    b.HasOne("Chocolaterie.Entities.Factory", "Factory")
                         .WithMany("ChocolateBars")
                         .HasForeignKey("FactoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Factories");
+                    b.Navigation("Factory");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Orders", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.Order", b =>
                 {
-                    b.HasOne("Chocolaterie.Models.Clients", "Clients")
+                    b.HasOne("Chocolaterie.Entities.Client", "Client")
                         .WithMany("Orders")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Chocolaterie.Models.Discounts", "Discounts")
+                    b.HasOne("Chocolaterie.Entities.Discount", "Discount")
                         .WithMany("Orders")
                         .HasForeignKey("DiscountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Chocolaterie.Models.WholeSalers", "WholeSalers")
+                    b.HasOne("Chocolaterie.Entities.WholeSaler", "WholeSaler")
                         .WithMany("Orders")
                         .HasForeignKey("WholeSalerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Clients");
+                    b.Navigation("Client");
 
-                    b.Navigation("Discounts");
+                    b.Navigation("Discount");
 
-                    b.Navigation("WholeSalers");
+                    b.Navigation("WholeSaler");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.OrderLines", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.OrderLine", b =>
                 {
-                    b.HasOne("Chocolaterie.Models.Orders", "Orders")
+                    b.HasOne("Chocolaterie.Entities.Order", "Order")
                         .WithMany("OrderLines")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Chocolaterie.Models.Stocks", "Stocks")
+                    b.HasOne("Chocolaterie.Entities.Stock", "Stock")
                         .WithMany("OrderLines")
                         .HasForeignKey("StockId")
                         .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired();
 
-                    b.Navigation("Orders");
+                    b.Navigation("Order");
 
-                    b.Navigation("Stocks");
+                    b.Navigation("Stock");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Stocks", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.Stock", b =>
                 {
-                    b.HasOne("Chocolaterie.Models.ChocolateBars", "ChocolateBars")
+                    b.HasOne("Chocolaterie.Entities.ChocolateBar", "ChocolateBar")
                         .WithMany("Stocks")
                         .HasForeignKey("ChocolateBarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Chocolaterie.Models.WholeSalers", "WholeSalers")
+                    b.HasOne("Chocolaterie.Entities.WholeSaler", "WholeSaler")
                         .WithMany("Stocks")
                         .HasForeignKey("WholeSalerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ChocolateBars");
+                    b.Navigation("ChocolateBar");
 
-                    b.Navigation("WholeSalers");
+                    b.Navigation("WholeSaler");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.ChocolateBars", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.ChocolateBar", b =>
                 {
                     b.Navigation("Stocks");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Clients", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.Client", b =>
                 {
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Discounts", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.Discount", b =>
                 {
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Factories", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.Factory", b =>
                 {
                     b.Navigation("ChocolateBars");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Orders", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.Order", b =>
                 {
                     b.Navigation("OrderLines");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Stocks", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.Stock", b =>
                 {
                     b.Navigation("OrderLines");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.WholeSalers", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.WholeSaler", b =>
                 {
                     b.Navigation("Orders");
 

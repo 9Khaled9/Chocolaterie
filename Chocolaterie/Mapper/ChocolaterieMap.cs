@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Chocolaterie.DTOs;
-using Chocolaterie.Models;
+using Chocolaterie.Entities;
 
 namespace Chocolaterie.Mapper
 {

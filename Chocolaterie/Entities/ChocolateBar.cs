@@ -1,10 +1,10 @@
-﻿using Chocolaterie.Models.Common;
+﻿using Chocolaterie.Entities.Base;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Chocolaterie.Models
+namespace Chocolaterie.Entities
 {
-    public class ChocolateBar : BaseEntity
+    public class ChocolateBar : EntityBase
     {
         public ChocolateBar()
         {

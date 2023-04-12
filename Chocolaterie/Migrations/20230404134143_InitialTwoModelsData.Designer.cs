@@ -24,7 +24,7 @@ namespace Chocolaterie.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Chocolaterie.Models.ChocolateBars", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.ChocolateBars", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,7 +52,7 @@ namespace Chocolaterie.Migrations
                     b.ToTable("ChocolateBars");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Factories", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.Factories", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,9 +69,9 @@ namespace Chocolaterie.Migrations
                     b.ToTable("Factories");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.ChocolateBars", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.ChocolateBars", b =>
                 {
-                    b.HasOne("Chocolaterie.Models.Factories", "Factories")
+                    b.HasOne("Chocolaterie.Entities.Factories", "Factories")
                         .WithMany("ChocolateBars")
                         .HasForeignKey("FactoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -80,7 +80,7 @@ namespace Chocolaterie.Migrations
                     b.Navigation("Factories");
                 });
 
-            modelBuilder.Entity("Chocolaterie.Models.Factories", b =>
+            modelBuilder.Entity("Chocolaterie.Entities.Factories", b =>
                 {
                     b.Navigation("ChocolateBars");
                 });

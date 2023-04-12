@@ -1,6 +1,6 @@
-﻿using Chocolaterie.DTOs.Common;
-using Chocolaterie.Models;
-using Chocolaterie.Models.Common;
+﻿using Chocolaterie.DTOs.Base;
+using Chocolaterie.Entities;
+using Chocolaterie.Entities.Common;
 
 namespace Chocolaterie.DTOs
 {

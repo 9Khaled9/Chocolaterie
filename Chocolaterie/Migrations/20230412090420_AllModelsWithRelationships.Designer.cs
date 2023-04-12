@@ -3,6 +3,7 @@ using Chocolaterie.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Chocolaterie.Migrations
 {
     [DbContext(typeof(ChocolaterieContext))]
-    partial class ChocolaterieContextModelSnapshot : ModelSnapshot
+    [Migration("20230412090420_AllModelsWithRelationships")]
+    partial class AllModelsWithRelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,9 +38,6 @@ namespace Chocolaterie.Migrations
                     b.Property<int>("FactoryId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -49,7 +49,7 @@ namespace Chocolaterie.Migrations
 
                     b.HasIndex("FactoryId");
 
-                    b.ToTable("ChocolateBars");
+                    b.ToTable("ChocolateBar");
                 });
 
             modelBuilder.Entity("Chocolaterie.Entities.Client", b =>
@@ -68,16 +68,13 @@ namespace Chocolaterie.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clients");
+                    b.ToTable("Client");
                 });
 
             modelBuilder.Entity("Chocolaterie.Entities.Discount", b =>
@@ -92,9 +89,6 @@ namespace Chocolaterie.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<double>("Percentage")
                         .HasColumnType("float");
 
@@ -104,7 +98,7 @@ namespace Chocolaterie.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Discounts");
+                    b.ToTable("Discount");
                 });
 
             modelBuilder.Entity("Chocolaterie.Entities.Factory", b =>
@@ -114,9 +108,6 @@ namespace Chocolaterie.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -148,9 +139,6 @@ namespace Chocolaterie.Migrations
                     b.Property<int>("DiscountId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<int>("OrderType")
                         .HasColumnType("int");
 
@@ -171,7 +159,7 @@ namespace Chocolaterie.Migrations
 
                     b.HasIndex("WholeSalerId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("Chocolaterie.Entities.OrderLine", b =>
@@ -181,9 +169,6 @@ namespace Chocolaterie.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
@@ -200,7 +185,7 @@ namespace Chocolaterie.Migrations
 
                     b.HasIndex("StockId");
 
-                    b.ToTable("OrderLines");
+                    b.ToTable("OrderLine");
                 });
 
             modelBuilder.Entity("Chocolaterie.Entities.Stock", b =>
@@ -218,9 +203,6 @@ namespace Chocolaterie.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<int>("Quatity")
                         .HasColumnType("int");
 
@@ -233,7 +215,7 @@ namespace Chocolaterie.Migrations
 
                     b.HasIndex("WholeSalerId");
 
-                    b.ToTable("Stocks");
+                    b.ToTable("Stock");
                 });
 
             modelBuilder.Entity("Chocolaterie.Entities.WholeSaler", b =>
@@ -252,16 +234,13 @@ namespace Chocolaterie.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("WholeSalers");
+                    b.ToTable("WholeSaler");
                 });
 
             modelBuilder.Entity("Chocolaterie.Entities.ChocolateBar", b =>

@@ -1,9 +1,9 @@
-﻿using Chocolaterie.Models.Common;
+﻿using Chocolaterie.Entities.Base;
 using Microsoft.Build.Framework;
 
-namespace Chocolaterie.Models
+namespace Chocolaterie.Entities
 {
-    public class Client : BaseEntity
+    public class Client : EntityBase
     {
         public Client() { }
 

@@ -1,4 +1,4 @@
-﻿namespace Chocolaterie.Models.Common
+﻿namespace Chocolaterie.Entities.Common
 {
     public enum OrderType
     {

@@ -1,4 +1,4 @@
-﻿namespace Chocolaterie.DTOs.Common
+﻿namespace Chocolaterie.DTOs.Base
 {
     public abstract class BaseDto
     {

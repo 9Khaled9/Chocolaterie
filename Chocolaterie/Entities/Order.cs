@@ -1,9 +1,10 @@
-﻿using Chocolaterie.Models.Common;
+﻿using Chocolaterie.Entities.Base;
+using Chocolaterie.Entities.Common;
 using System.ComponentModel.DataAnnotations;
 
-namespace Chocolaterie.Models
+namespace Chocolaterie.Entities
 {
-    public class Order : BaseEntity
+    public class Order : EntityBase
     {
         public Order()
         {

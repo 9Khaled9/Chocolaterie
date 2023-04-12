@@ -1,9 +1,9 @@
-﻿using Chocolaterie.Models.Common;
+﻿using Chocolaterie.Entities.Base;
 using System.ComponentModel.DataAnnotations;
 
-namespace Chocolaterie.Models
+namespace Chocolaterie.Entities
 {
-    public class Stock : BaseEntity
+    public class Stock : EntityBase
     {
         public Stock()
         {

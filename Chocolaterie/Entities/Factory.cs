@@ -1,10 +1,10 @@
-﻿using Chocolaterie.Models.Common;
+﻿using Chocolaterie.Entities.Base;
 using Microsoft.Build.Framework;
 using Microsoft.Extensions.Hosting;
 
-namespace Chocolaterie.Models
+namespace Chocolaterie.Entities
 {
-    public class Factory : BaseEntity
+    public class Factory : EntityBase
     {
         public Factory() { }
 

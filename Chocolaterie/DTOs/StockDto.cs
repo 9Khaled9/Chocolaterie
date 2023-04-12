@@ -1,5 +1,5 @@
 ﻿
-using Chocolaterie.DTOs.Common;
+using Chocolaterie.DTOs.Base;
 
 namespace Chocolaterie.DTOs
 {

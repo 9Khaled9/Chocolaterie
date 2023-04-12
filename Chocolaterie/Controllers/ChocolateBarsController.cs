@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Chocolaterie.Data;
-using Chocolaterie.Models;
+using Chocolaterie.Entities;
 
 namespace Chocolaterie.Controllers
 {
