@@ -23,6 +23,9 @@ namespace Chocolaterie.Entities
         [Required]
         public double Percentage { get; set; }
 
+        [Required]
+        public int AboveConstraint { get; set; }
+
         public ICollection<Order> Orders { get; } = new List<Order>();
 
     }

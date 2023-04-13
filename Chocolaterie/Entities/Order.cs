@@ -20,11 +20,11 @@ namespace Chocolaterie.Entities
 
         public string Description { get; set; }
 
-        public int Total { get; set; }
+        public double Total { get; set; }
 
-        public int DiscountAmount { get; set; }
+        public double DiscountAmount { get; set; }
 
-        public int TotalAfterDiscount { get; set; }
+        public double TotalAfterDiscount { get; set; }
 
         public int WholeSalerId { get; set; }
         public WholeSaler WholeSaler { get; set; }
@@ -35,7 +35,7 @@ namespace Chocolaterie.Entities
         public int DiscountId { get; set; }
         public Discount? Discount { get; set; }
 
-        public ICollection<OrderLine> OrderLines { get; } = new List<OrderLine>();
+        public ICollection<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
 
         public void AddLine (OrderLine line)
         {

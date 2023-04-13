@@ -15,5 +15,7 @@ namespace Chocolaterie.DTOs
         public string Description { get; set; }
 
         public double Percentage { get; set; }
+
+        public int AboveConstraint { get; set; }
     }
 }

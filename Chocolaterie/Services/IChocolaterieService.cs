@@ -11,6 +11,6 @@ namespace Chocolaterie.Services
         Task<bool> AddChocolateBarByFactoryAsync(AddChocolateBarByFactoryInfo dto);
         Task<bool> DeleteChocolateBarByFactoryAsync(DeleteChocolateBarByFactoryInfo info);
         Task<StockDto> UpdateStockQuantityAsync(UpdateStockQuantityInfo info);
-        
+        Task<bool> AddSaleToWholeSalerAsync(OrderDto dto);
     }
 }

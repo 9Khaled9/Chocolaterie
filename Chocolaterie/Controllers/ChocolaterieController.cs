@@ -74,7 +74,19 @@ namespace Chocolaterie.Controllers
 
             return Ok(result);
 
-            
+
+        }
+
+        [HttpPost("AddSaleToWholeSaler")]
+        public async Task<IActionResult> AddSaleToWholeSalerAsync(OrderDto dto)
+        {
+            var result = await _chocolaterieService.AddSaleToWholeSalerAsync(dto);
+
+            if (!result)
+            {
+                return BadRequest();
+            }
+            return Ok();
         }
     }
 }
