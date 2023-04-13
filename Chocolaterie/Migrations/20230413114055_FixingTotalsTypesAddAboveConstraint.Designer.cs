@@ -3,6 +3,7 @@ using Chocolaterie.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Chocolaterie.Migrations
 {
     [DbContext(typeof(ChocolaterieContext))]
-    partial class ChocolaterieContextModelSnapshot : ModelSnapshot
+    [Migration("20230413114055_FixingTotalsTypesAddAboveConstraint")]
+    partial class FixingTotalsTypesAddAboveConstraint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,15 +239,6 @@ namespace Chocolaterie.Migrations
                         new
                         {
                             Id = 1,
-                            AboveConstraint = 0,
-                            Description = "No discount is applied",
-                            IsDeleted = false,
-                            Percentage = 0.0,
-                            Title = "discount 0%"
-                        },
-                        new
-                        {
-                            Id = 2,
                             AboveConstraint = 10,
                             Description = "A 10% discount is applied above 10 chocolate bars",
                             IsDeleted = false,
@@ -253,7 +247,7 @@ namespace Chocolaterie.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 2,
                             AboveConstraint = 20,
                             Description = "A 20% discount is applied above 20 chocolate bars",
                             IsDeleted = false,
@@ -686,7 +680,7 @@ namespace Chocolaterie.Migrations
                     b.HasOne("Chocolaterie.Entities.Discount", "Discount")
                         .WithMany("Orders")
                         .HasForeignKey("DiscountId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Chocolaterie.Entities.WholeSaler", "WholeSaler")

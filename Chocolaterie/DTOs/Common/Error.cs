@@ -19,5 +19,7 @@ namespace Chocolaterie.DTOs.Common
 
         public static string ClientMustExist = "The client must exist!";
         public static string LineQuantityCannotBeTessThen1 = "An order line quantity cannot be less then 1";
+
+        public static string OrderNotFound = "Order not found!";
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Chocolaterie.DTOs;
 using Microsoft.EntityFrameworkCore;
 using Chocolaterie.DTOs.Common;
+using Chocolaterie.Entities.Common;
 
 namespace Chocolaterie.Services
 {
@@ -66,7 +67,21 @@ namespace Chocolaterie.Services
             return rowCount > 0;
         }
 
-        public async Task<bool> DeleteChocolateBarByFactoryAsync(DeleteChocolateBarByFactoryInfo info)
+        public async Task<bool> DeleteOrderAsync(int orderId)
+        {
+            var order = await _context.Orders.FindAsync(orderId);
+            if (order == null)
+            {
+                throw new ArgumentNullException(Error.OrderNotFound);
+            }
+
+            _context.Orders.Remove(order);
+            var rowCount = await _context.SaveChangesAsync();
+
+            return rowCount > 0;
+        }
+
+            public async Task<bool> DeleteChocolateBarByFactoryAsync(DeleteChocolateBarByFactoryInfo info)
         {
             if (info is null)
             {
@@ -144,7 +159,10 @@ namespace Chocolaterie.Services
             }
         }
 
-        public async Task<bool> AddSaleToWholeSalerAsync(OrderDto dto)
+        public async Task<OrderDto> AddSalesOrderToWholeSalerAsync(OrderDto dto) => await AddSaleToWholeSalerAsync(dto, OrderType.SalesOrder);
+        public async Task<OrderDto> RequestQuote(OrderDto dto) => await AddSaleToWholeSalerAsync(dto, OrderType.Quotation);
+
+        public async Task<OrderDto> AddSaleToWholeSalerAsync(OrderDto dto, OrderType orderType)
         {
             if (dto is null)
             {
@@ -156,7 +174,6 @@ namespace Chocolaterie.Services
             try
             {
                 var total = 0.0;
-                //var chocolateBarsCount = 0;
                 ChocolateBar chocolateBar = null;
                 Stock stock = null;
 
@@ -169,14 +186,17 @@ namespace Chocolaterie.Services
                         StockId = lineDto.StockId
                     });
                     stock = _context.Stocks.FindAsync(lineDto.StockId).Result;
+                    if (orderType == OrderType.SalesOrder)
+                    {
+                        stock.Quatity -= lineDto.Quantity;
+                    }
                     chocolateBar = _context.ChocolateBars.FindAsync(stock.ChocolateBarId).Result;
                     total += chocolateBar.Price;
-                    //chocolateBarsCount += lineDto.Quantity;
                 }
 
                 var order = new Order
                 {
-                    OrderType = Entities.Common.OrderType.SalesOrder,
+                    OrderType = orderType,
                     Description = dto.Description,
                     WholeSalerId = dto.WholeSalerId,
                     ClientId = dto.ClientId,
@@ -188,11 +208,13 @@ namespace Chocolaterie.Services
 
                 await _context.Orders.AddAsync(order);
                 var rowCount = await _context.SaveChangesAsync();
-                return rowCount > 0;
+
+                var result = _mapper.Map<OrderDto>(order);
+                return result;
             }
-            catch (e)
+            catch (Exception)
             {
-                throw new Exception(e);
+                throw;
             }
         }
 
@@ -201,12 +223,13 @@ namespace Chocolaterie.Services
         #region Private Methods
         private void ApplyOrderDiscount(Order order)
         {
-            var discount = _context.Discounts.Where(d => d.AboveConstraint <= order.OrderLines.Sum(d => d.Quantity)).OrderByDescending(d => d.AboveConstraint).FirstOrDefault();
+            var chocolateBarsCount = order.OrderLines.Sum(d => d.Quantity);
+            var discount = _context.Discounts.Where(d => d.AboveConstraint < chocolateBarsCount).OrderByDescending(d => d.AboveConstraint).FirstOrDefault();
             if (discount != null)
             {
                 order.DiscountAmount = discount.Percentage * order.Total / 100;
                 order.TotalAfterDiscount = order.Total - order.DiscountAmount;
-                order.Discount = discount;
+                order.DiscountId = discount.Id;
             }
         }
 

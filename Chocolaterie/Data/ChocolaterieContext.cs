@@ -14,7 +14,7 @@ namespace Chocolaterie.Data
 {
     public class ChocolaterieContext : DbContext
     {
-        public ChocolaterieContext (DbContextOptions<ChocolaterieContext> options)
+        public ChocolaterieContext(DbContextOptions<ChocolaterieContext> options)
             : base(options)
         {
         }
@@ -32,10 +32,16 @@ namespace Chocolaterie.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrderLine>()
-            .HasOne(o => o.Stock)
-            .WithMany(s => s.OrderLines)
-            .HasForeignKey(o => o.StockId)
-            .OnDelete(DeleteBehavior.ClientNoAction);
+                .HasOne(o => o.Stock)
+                .WithMany(s => s.OrderLines)
+                .HasForeignKey(o => o.StockId)
+                .OnDelete(DeleteBehavior.ClientNoAction);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Discount)
+                .WithMany(d => d.Orders)
+                .HasForeignKey(d => d.DiscountId)
+                .OnDelete(DeleteBehavior.ClientNoAction);
 
             modelBuilder.ApplyConfiguration(new ChocolateBarMap());
             modelBuilder.ApplyConfiguration(new ClientMap());

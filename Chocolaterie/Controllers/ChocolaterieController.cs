@@ -80,13 +80,21 @@ namespace Chocolaterie.Controllers
         [HttpPost("AddSaleToWholeSaler")]
         public async Task<IActionResult> AddSaleToWholeSalerAsync(OrderDto dto)
         {
-            var result = await _chocolaterieService.AddSaleToWholeSalerAsync(dto);
+            var result = await _chocolaterieService.AddSalesOrderToWholeSalerAsync(dto);
 
-            if (!result)
+            if (result is null)
             {
                 return BadRequest();
             }
             return Ok();
+        }
+
+        [HttpPost("RequestQuote")]
+        public async Task<OrderDto> RequestQuote(OrderDto dto)
+        {
+            var result = await _chocolaterieService.RequestQuote(dto);
+
+            return result;
         }
     }
 }

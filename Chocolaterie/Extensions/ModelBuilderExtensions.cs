@@ -34,8 +34,9 @@ namespace Chocolaterie.Extensions
             );
 
             modelBuilder.Entity<Discount>().HasData(
-                new Discount { Id = 1, Title = "discount 10%", Description = "A 10% discount is applied above 10 chocolate bars", Percentage = 10 },
-                new Discount { Id = 2, Title = "discount 20%", Description = "A 20% discount is applied above 20 chocolate bars", Percentage = 20 }
+                new Discount { Id = 1, Title = "discount 0%", Description = "No discount is applied", Percentage = 0, AboveConstraint = 0},
+                new Discount { Id = 2, Title = "discount 10%", Description = "A 10% discount is applied above 10 chocolate bars", Percentage = 10, AboveConstraint = 10},
+                new Discount { Id = 3, Title = "discount 20%", Description = "A 20% discount is applied above 20 chocolate bars", Percentage = 20, AboveConstraint = 20 }
             );
 
             modelBuilder.Entity<WholeSaler>().HasData(

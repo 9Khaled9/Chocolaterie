@@ -4,6 +4,7 @@ namespace Chocolaterie.DTOs
 {
     public class ChocolateBarDto : BaseDto
     {
+        public ChocolateBarDto() { }
         public ChocolateBarDto(string name, double price, int factoryId)
         {
             Name = name;
