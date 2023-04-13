@@ -21,6 +21,10 @@ namespace Chocolaterie.Entities
 
         public string Address { get; set; }
 
+        public string Email { get; set; }
+
+        public string Contact { get; set; }
+
         public ICollection<Stock> Stocks { get; } = new List<Stock>();
 
         public ICollection<Order> Orders { get; } = new List<Order>();

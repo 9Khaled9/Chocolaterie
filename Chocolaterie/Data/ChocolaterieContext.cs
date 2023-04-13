@@ -45,6 +45,8 @@ namespace Chocolaterie.Data
             modelBuilder.ApplyConfiguration(new OrderLineMap());
             modelBuilder.ApplyConfiguration(new StockMap());
             modelBuilder.ApplyConfiguration(new WholeSalerMap());
+
+            modelBuilder.Seed();
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

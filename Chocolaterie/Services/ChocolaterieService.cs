@@ -109,7 +109,8 @@ namespace Chocolaterie.Services
                 throw new ArgumentNullException(Error.WholeSalerNotFount);
             }
 
-            var stock = await _context.Stocks.FindAsync(info.StockId);
+            //var stock = await _context.Stocks.FindAsync(info.StockId);
+            var stock = _context.Stocks.Where(s => s.Id == info.StockId).Include(s => s.WholeSaler).FirstOrDefault();
             if (stock == null)
             {
                 throw new ArgumentNullException(Error.StockNotFount);
